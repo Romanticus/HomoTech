@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "9926f227-a61d-4136-a4fb-3203e3b509bc",
+		"name": "Afisha Api",
+		"description": "Yandex Practicum «Film!» project api\n\nContact Support:\n Email: aleksei-mart@yandex-team.ru",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "films",
+			"item": [
+				{
+					"name": "return list of films available on this week",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/films",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"films"
+							]
+						},
+						"description": "return list of films available on this week"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/films",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"films"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"total\": 81692856.64964156,\n  \"items\": [\n    {\n      \"id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"rating\": 2.9,\n      \"director\": \"Итан Райт\",\n      \"tags\": [\n        \"Документальный\"\n      ],\n      \"title\": \"Архитекторы общества\",\n      \"about\": \"Документальный фильм, исследующий влияние искусственного интеллекта на общество и этические, философские и социальные последствия технологии.\",\n      \"description\": \"Документальный фильм Итана Райта исследует влияние технологий на современное общество, уделяя особое внимание роли искусственного интеллекта в формировании нашего будущего. Фильм исследует этические, философские и социальные последствия гонки технологий ИИ и поднимает вопрос: какой мир мы создаём для будущих поколений.\",\n      \"image\": \"/images/bg1s.jpg\",\n      \"cover\": \"/images/bg1c.jpg\"\n    },\n    {\n      \"id\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"rating\": 2.9,\n      \"director\": \"Итан Райт\",\n      \"tags\": [\n        \"Документальный\"\n      ],\n      \"title\": \"Архитекторы общества\",\n      \"about\": \"Документальный фильм, исследующий влияние искусственного интеллекта на общество и этические, философские и социальные последствия технологии.\",\n      \"description\": \"Документальный фильм Итана Райта исследует влияние технологий на современное общество, уделяя особое внимание роли искусственного интеллекта в формировании нашего будущего. Фильм исследует этические, философские и социальные последствия гонки технологий ИИ и поднимает вопрос: какой мир мы создаём для будущих поколений.\",\n      \"image\": \"/images/bg1s.jpg\",\n      \"cover\": \"/images/bg1c.jpg\"\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "return actual shedule for selected film",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/films/:id/shedule",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"films",
+								":id",
+								"shedule"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+									"description": "(Required) film id value"
+								}
+							]
+						},
+						"description": "return actual shedule for selected film"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/films/:id/shedule",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"films",
+										":id",
+										"shedule"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+											"description": "(Required) film id value"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"total\": 50985752.9195197,\n  \"items\": [\n    {\n      \"id\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n      \"daytime\": \"2023-05-29T10:30:00.001Z\",\n      \"hall\": \"2\",\n      \"rows\": 5,\n      \"seats\": 10,\n      \"price\": 350,\n      \"taken\": [\n        \"1:2\",\n        \"1:2\"\n      ]\n    },\n    {\n      \"id\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n      \"daytime\": \"2023-05-29T10:30:00.001Z\",\n      \"hall\": \"2\",\n      \"rows\": 5,\n      \"seats\": 10,\n      \"price\": 350,\n      \"taken\": [\n        \"1:2\",\n        \"1:2\"\n      ]\n    }\n  ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"film\": \"64145bb0-996a-4644-b351-af6dc1266514\",\n    \"session\": \"373452c8-e4c6-450a-a2ca-30d46a27e81e\",\n    \"daytime\": \"2023-05-29T10:30:00.001Z\",\n    \"row\": 1,\n    \"seat\": 1,\n    \"price\": 350\n  }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/order",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "OK",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"film\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n    \"session\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n    \"daytime\": \"2023-05-29T10:30:00.001Z\",\n    \"row\": 2,\n    \"seat\": 5,\n    \"price\": 350\n  },\n  {\n    \"film\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n    \"session\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n    \"daytime\": \"2023-05-29T10:30:00.001Z\",\n    \"row\": 2,\n    \"seat\": 5,\n    \"price\": 350\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"total\": 2,\n  \"items\": [\n    {\n      \"film\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"session\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n      \"daytime\": \"2023-05-29T10:30:00.001Z\",\n      \"row\": 2,\n      \"seat\": 5,\n      \"price\": 350,\n      \"id\": \"c2260f3b-6ca0-453f-f379-96ffa676089d\"\n    },\n    {\n      \"film\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n      \"session\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n      \"daytime\": \"2023-05-29T10:30:00.001Z\",\n      \"row\": 2,\n      \"seat\": 5,\n      \"price\": 350,\n      \"id\": \"urn:uuid:ee261ff4-dc3a-cea9-d4f5-3aeb22e1abac\"\n    }\n  ]\n}"
+				},
+				{
+					"name": "Client sent invalid request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n  {\n    \"film\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n    \"session\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n    \"daytime\": \"2023-05-29T10:30:00.001Z\",\n    \"row\": 2,\n    \"seat\": 5,\n    \"price\": 350\n  },\n  {\n    \"film\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\n    \"session\": \"95ab4a20-9555-4a06-bfac-184b8c53fe70\",\n    \"daytime\": \"2023-05-29T10:30:00.001Z\",\n    \"row\": 2,\n    \"seat\": 5,\n    \"price\": 350\n  }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n  \"error\": \"quis minim\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://stub.practicum-team.ru/api/afisha",
+			"type": "string"
+		},
+		{
+			"key": "filmId",
+			"value": ""
+		},
+		{
+			"key": "sessionId",
+			"value": ""
+		}
+	]
+}

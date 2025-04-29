@@ -1,0 +1,33 @@
+@use 'variables' as *;
+@use 'mixins';
+
+.ticket {
+  @include mixins.flex(row);
+  align-items: center;
+  gap: $defaultPadding;
+  background: $primaryLight;
+  padding: $defaultPadding;
+  border-radius: 3rem;
+
+  .info {
+    flex-grow: 1;
+  }
+
+  .place,
+  .price {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 2.4rem;
+  }
+
+  .place::before {
+    content: '➔';
+    margin-right: 0.5rem;
+  }
+
+  .delete {
+    @include mixins.icon(2rem, 'trash');
+    @include mixins.link($hover, white);
+    opacity: 0.5;
+  }
+}

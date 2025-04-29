@@ -1,0 +1,108 @@
+/*
+	This font software is the property of Commercial Type.
+
+	You may not modify the font software, use it on another website, or install it on a computer.
+
+	License information is available at http://commercialtype.com/eula
+	For more information please visit Commercial Type at http://commercialtype.com or email us at info[at]commercialtype.com
+
+	Copyright (C) 2016 Schwartzco Inc.
+	
+	*/
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Light.eot');
+	src: url('/fonts/ys-text/YS Text-Light.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Light.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Light.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Light.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Light.svg#YSText-Light') format('svg');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Light Italic.eot');
+	src: url('/fonts/ys-text/YS Text-Light Italic.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Light Italic.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Light Italic.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Light Italic.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Light Italic.svg#YSText-LightItalic') format('svg');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Regular.woff2') format('woff2');
+	src: url('/fonts/ys-text/YS Text-Regular.eot');
+	src: url('/fonts/ys-text/YS Text-Regular.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Regular.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Regular.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Regular.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Regular.svg#YSText-Regular') format('svg');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Regular Italic.eot');
+	src: url('/fonts/ys-text/YS Text-Regular Italic.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Regular Italic.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Regular Italic.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Regular Italic.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Regular Italic.svg#YSText-RegularItalic') format('svg');
+	font-weight: 400;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Medium.eot');
+	src: url('/fonts/ys-text/YS Text-Medium.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Medium.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Medium.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Medium.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Medium.svg#YSText-Medium') format('svg');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Medium Italic.eot');
+	src: url('/fonts/ys-text/YS Text-Medium Italic.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Medium Italic.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Medium Italic.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Medium Italic.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Medium Italic.svg#YSText-MediumItalic') format('svg');
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Bold.eot');
+	src: url('/fonts/ys-text/YS Text-Bold.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Bold.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Bold.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Bold.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Bold.svg#YSText-Bold') format('svg');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'YS Text';
+	src: url('/fonts/ys-text/YS Text-Bold Italic.eot');
+	src: url('/fonts/ys-text/YS Text-Bold Italic.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/ys-text/YS Text-Bold Italic.woff2') format('woff2'),
+		url('/fonts/ys-text/YS Text-Bold Italic.woff') format('woff'),
+		url('/fonts/ys-text/YS Text-Bold Italic.ttf') format('truetype'),
+		url('/fonts/ys-text/YS Text-Bold Italic.svg#YSText-BoldItalic') format('svg');
+	font-weight: 700;
+	font-style: italic;
+}

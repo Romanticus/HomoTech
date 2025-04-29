@@ -1,0 +1,66 @@
+services:
+  frontend:
+     image: ghcr.io/romanticus/film-react/frontend:latest
+     container_name: frontend
+     restart: "unless-stopped"
+     ports:
+      - "80:80"
+     networks:
+      - app-network 
+     volumes:
+      - frontend-data:/usr/share/nginx/html:ro
+
+  backend:
+    image: ghcr.io/romanticus/film-react/backend:latest
+    container_name: backend
+    restart: "unless-stopped"
+    ports:
+      - "3000:3000"  
+    networks:
+      - app-networkcd
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USERNAME=prac1
+      - DATABASE_PASSWORD=prac1
+      - DATABASE_NAME=prac1
+    build:
+      context: ./  # Использовать корень проекта как контекст
+      dockerfile: ./backend/Dockerfile
+
+  db:
+    image: postgres:15
+    container_name: db
+    restart: "unless-stopped"
+    environment:
+      POSTGRES_USER: prac1
+      POSTGRES_PASSWORD: prac1
+      POSTGRES_DB: prac1
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: "unless-stopped"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@example.com
+      PGADMIN_DEFAULT_PASSWORD: rootT
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  frontend-data:
+  postgres:
