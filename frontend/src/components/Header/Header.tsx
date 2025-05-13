@@ -1,5 +1,5 @@
 import styles from './Header.module.scss';
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/logo.png';
 
 export type HeaderProps = {
     counter: number;
@@ -13,7 +13,7 @@ export function Header({ counter, onClick }: HeaderProps) {
                 <img
                     className={styles.logoImage}
                     src={logo}
-                    alt="Film! logo"
+                    alt="HomoTech"
                 />
             </a>
             <button className={styles.basket} onClick={onClick}>
