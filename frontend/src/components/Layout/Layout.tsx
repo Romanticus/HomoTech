@@ -33,13 +33,6 @@ export function Layout({children, isLocked, onOpenAdminPanel}: LayoutProps) {
             [styles.locked]: isLocked,
         })}>
             {children}
-            {openAdminPanel && (
-    <button 
-      className="admin-panel-trigger"
-      onClick={openAdminPanel}
-      aria-label="Open admin panel"
-    />
-  )}
         </div>
     );
 }
