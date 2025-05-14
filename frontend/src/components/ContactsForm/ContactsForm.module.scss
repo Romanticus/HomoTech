@@ -37,3 +37,22 @@
     }
   }
 }
+.error {
+  color: #ff4444;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.submitButton {
+  background: #2196F3;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  
+  &:hover {
+    background: #1976D2;
+  }
+}

@@ -1,7 +1,7 @@
 import {ReactNode, Reducer, useEffect, useReducer, useRef} from "react";
 import {Actions, appReducer, AppState, initialState, Modals} from "../utils/state.ts";
 import {Contacts, FilmAPI, IFilmAPI, Movie, Session} from "../utils/api.ts";
-import {API_URL, CDN_URL} from "../utils/constants.ts";
+import {API_URL, CDN_URL, REACT_APP_ADMIN_SECRET} from "../utils/constants.ts";
 import {Button} from "../components/Button/Button.tsx";
 
 const flow : Record<Modals, { next: Modals | null, prev: Modals | null }> = {
@@ -9,7 +9,8 @@ const flow : Record<Modals, { next: Modals | null, prev: Modals | null }> = {
     'places': { next: 'basket', prev: 'schedule' },
     'basket': { next: 'contacts', prev: 'places' },
     'contacts': { next: 'success', prev: 'basket' },
-    'success': { next: null, prev: 'contacts' }
+    'success': { next: null, prev: 'contacts' },
+    'admin-auth':{next: null, prev: null }
 };
 
 export function useAppState() {
@@ -37,6 +38,8 @@ export function useAppState() {
     const removeTicket = (place: string) => dispatch({ type: 'removeFromBasket', payload: place });
     const closeModal = () => dispatch({ type: 'closeModal' });
     const setContacts = (contacts: Contacts) => dispatch({ type: 'setContacts', payload: contacts });
+    const openAdminPanel = () => dispatch({ type: 'openModal', payload: 'admin-auth' });
+
 
     const orderTickets = () => {
         api.current.orderTickets({
@@ -79,7 +82,8 @@ export function useAppState() {
                 onClick={orderTickets}
                 disabled={!state.contacts.email || !state.contacts.phone}
             />,
-            'success': null
+            'success': null,
+            'admin-auth': null
         };
 
         return actions[state.modal!];
@@ -93,7 +97,38 @@ export function useAppState() {
             api.current.getFilmSchedule(state.selectedFilm).then(setCurrentSchedule);
         }
     };
-
+    const handleAdminLogin = async (password: string) => {
+        try {
+          const headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          
+          // Добавляем проверку на существование значения
+          if (REACT_APP_ADMIN_SECRET) {
+            headers.append('X-Admin-Token', REACT_APP_ADMIN_SECRET);
+          }
+      
+          const response = await fetch(`${API_URL}/admin/auth`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ password })
+          });
+          
+          if (!response.ok) throw new Error('Ошибка авторизации');
+          
+          dispatch({ type: 'admin/login' });
+          sessionStorage.setItem('adminAuth', 'true');
+          
+        } catch (error) {
+          if (error instanceof Error) {
+            dispatch({ type: 'admin/authError', payload: error.message });
+          }
+        }
+      };
+      
+      const handleAdminLogout = () => {
+        dispatch({ type: 'admin/logout' });
+        sessionStorage.removeItem('adminAuth');
+      };
     useEffect(() => {
         api.current.getFilms().then(setFilms);
     }, []);
@@ -115,7 +150,10 @@ export function useAppState() {
             handleOpenBasket,
             handleOpenFilm,
             getAction,
-            go
+            go,
+            handleAdminLogin,
+            handleAdminLogout,
+            openAdminPanel
         }
     };
 }

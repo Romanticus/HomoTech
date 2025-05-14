@@ -57,6 +57,19 @@ export class Api {
     }
 }
 
+// export class AdminFilmAPI extends FilmAPI {
+//     constructor(cdn: string, baseUrl: string, adminToken: string) {
+//       super(cdn, baseUrl, {
+//         headers: {
+//           'X-Admin-Token': adminToken
+//         }
+//       });
+//     }
+  
+//     async auth(password: string): Promise<{ token: string }> {
+//       return this._post('/admin/auth', { password });
+//     }
+//   }
 export type ApiListResponse<Type> = {
     total: number;
     items: Type[];
