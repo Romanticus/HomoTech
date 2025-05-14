@@ -30,3 +30,27 @@ export class FilmSheduleDTO {
   total: number;
   items: SheduleDTO[];
 }
+export class CreateFilmDTO implements Omit<FilmDTO, 'id'> {
+  rating: number;
+  director: string;
+  tags: string[];
+  title: string;
+  about: string;
+  description: string;
+  image: string;
+  cover: string;
+}
+
+export class UpdateFilmDTO extends CreateFilmDTO {
+  id: string;
+}
+
+export class CreateScheduleDTO implements Omit<SheduleDTO, 'id'|'taken'> {
+  daytime: Date;
+  hall: number;
+  rows: number;
+  seats: number;
+  price: number;
+}
+
+export class UpdateScheduleDTO extends SheduleDTO {}

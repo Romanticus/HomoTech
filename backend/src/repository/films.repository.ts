@@ -1,10 +1,13 @@
 // ../films/films.repository.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
+import { 
+  CreateFilmDTO,
+  CreateScheduleDTO,
   FilmDTO,
   FilmListResponseDTO,
   FilmSheduleDTO,
+  SheduleDTO,
 } from '../films/dto/films.dto';
 import { Film } from '../films/entities/film.entity';
 import { Schedule } from '../films/entities/schedule.entity';
@@ -21,7 +24,7 @@ export class FilmsRepository {
     private readonly scheduleRepository: Repository<Schedule>,
   ) {}
 
-  private mapFilmToDTO(film: Film): FilmDTO {
+    mapFilmToDTO(film: Film): FilmDTO {
     return {
       id: film.id,
       rating: film.rating,
@@ -33,6 +36,35 @@ export class FilmsRepository {
       image: film.image,
       cover: film.cover,
     };
+  }
+   mapScheduleToDTO(schedule: Schedule): SheduleDTO {
+    return {
+      id: schedule.id,
+      daytime: schedule.daytime,
+      hall: schedule.hall,
+      rows: schedule.rows,
+      seats: schedule.seats,
+      price: schedule.price,
+      taken: schedule.taken || [],
+    };
+  }
+  
+  async createFilm(dto: CreateFilmDTO): Promise<Film> {
+    const film = this.filmRepository.create(dto);
+    return this.filmRepository.save(film);
+  }
+
+  async createSchedule(filmId: string, dto: CreateScheduleDTO): Promise<Schedule> {
+    const film = await this.filmRepository.findOneBy({ id: filmId });
+    if (!film) throw new Error('Фильм не найден');
+    
+    const schedule = this.scheduleRepository.create({
+      ...dto,
+      film,
+      taken: [] // Инициализируем пустым массивом
+    });
+    
+    return this.scheduleRepository.save(schedule);
   }
 
   async findAll(): Promise<FilmListResponseDTO> {

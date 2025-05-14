@@ -99,24 +99,20 @@ export function useAppState() {
     };
     const handleAdminLogin = async (password: string) => {
         try {
-          const headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          
-          // Добавляем проверку на существование значения
-          if (REACT_APP_ADMIN_SECRET) {
-            headers.append('X-Admin-Token', REACT_APP_ADMIN_SECRET);
-          }
-      
           const response = await fetch(`${API_URL}/admin/auth`, {
             method: 'POST',
-            headers,
+            headers: {
+              'Content-Type': 'application/json'
+            },
             body: JSON.stringify({ password })
           });
-          
+      
           if (!response.ok) throw new Error('Ошибка авторизации');
           
+          const { access_token } = await response.json();
+          
+          sessionStorage.setItem('adminToken', access_token);
           dispatch({ type: 'admin/login' });
-          sessionStorage.setItem('adminAuth', 'true');
           
         } catch (error) {
           if (error instanceof Error) {

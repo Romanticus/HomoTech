@@ -7,6 +7,7 @@ import { OrderController } from './order/order.controller';
 import { OrderService } from './order/order.service';
 import { FilmsModule } from './films/films.module';
 import { DatabaseModule } from './database/database.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { DatabaseModule } from './database/database.module';
     }),
     FilmsModule,
     DatabaseModule,
+    AuthModule
   ],
   controllers: [OrderController],
   exports: [configProvider],
