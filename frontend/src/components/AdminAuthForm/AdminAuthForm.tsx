@@ -26,6 +26,7 @@ export function AdminAuthForm({ onSubmit, error }: AdminAuthFormProps) {
                     placeholder="Админский пароль"
                     autoComplete="current-password"
                     required
+                    autoFocus
                 />
             </label>
             

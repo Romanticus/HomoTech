@@ -1,0 +1,59 @@
+
+@use 'variables' as *;
+@use 'mixins';
+
+.form {
+  @include mixins.flex(column);
+  gap: 1.5rem;
+  background: $primaryLight;
+  padding: $defaultPadding;
+  border-radius: 3rem;
+//   margin: 3rem;
+  .label {
+    flex-grow: 1;
+  }
+  .textarea,
+  .input {
+    background: $primary;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    font-size: 1.4rem;
+    width: 100%;
+    box-sizing: border-box;
+    outline-color: $secondary;
+
+    &:focus {
+      outline-style: solid;
+    }
+
+    &:invalid {
+      border-color: $error;
+      outline-color: $error;
+    }
+
+    &::placeholder {
+      color: lighten($primaryLight, 23%);
+    }
+  }
+}
+.error {
+  color: #ff4444;
+  margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.submitButton {
+  background: #2196F3;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  
+  &:hover {
+    background: #1976D2;
+  }
+}

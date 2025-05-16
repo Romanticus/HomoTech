@@ -14,8 +14,8 @@ export interface AppState {
   isError: boolean;
   adminIsAuthenticated: boolean;
   adminError: string | null;
-}
-
+  
+} 
 export type Actions =
   | { type: "setFilms"; payload: Movie[] }
   | { type: "selectFilm"; payload: string }
@@ -29,7 +29,10 @@ export type Actions =
   | { type: "clearBasket" }
   | { type: "admin/login" }
   | { type: "admin/logout" }
-  | { type: "admin/authError"; payload: string };
+  | { type: "admin/authError"; payload: string }
+  | { type: 'admin/error'; payload: string }
+  | { type: 'admin/addFilm'; payload: Movie }
+  | { type: 'admin/addSession'; payload: Session };;
 
 export const initialState: AppState = {
   films: [],
@@ -185,11 +188,27 @@ export function appReducer(state: AppState, action: Actions): AppState {
         ...state,
         adminIsAuthenticated: false
       };
-    // case "admin/authError":
-    //   return {
-    //     ...state,
-    //     adminError: action.payload
-    //   };
-  }
+    case "admin/authError":
+      return {
+        ...state,
+        adminError: action.payload
+      };
+  
+    case 'admin/addFilm':
+      return {
+        ...state,
+        films: [...state.films, action.payload], // Добавляем фильм в основной список
+        adminError: null
+      };
+
+    case 'admin/addSession':
+      return {
+        ...state,
+        schedule: [...state.schedule, action.payload], // Добавляем сеанс в основное расписание
+        adminError: null
+      };
+  default:
+  
   return state;
+}
 }

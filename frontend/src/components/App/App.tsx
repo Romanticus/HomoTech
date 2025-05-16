@@ -12,14 +12,17 @@ import {ContactsForm} from "../ContactsForm/ContactsForm.tsx";
 import {Message} from "../Message/Message.tsx";
 import {useAppState} from "../../hooks/useAppState.tsx";
 import { AdminAuthForm } from "../AdminAuthForm/AdminAuthForm.tsx";
-
+import { Navigate } from "react-router-dom";
+import AdminPanel from "../AdminPanel/AdminPanel.tsx";
+import { useAppContext } from "../../contexts/AppContext.tsx";
 
 function App() {
-    const { state, data, handlers } = useAppState();
-
+    // const { state, data, handlers } = useAppState();
+    const { state,data, handlers } = useAppContext();
     return (<>
         <Layout isLocked={!!state.modal} onOpenAdminPanel={handlers.openAdminPanel}>
            <Header counter={state.basket.length} onClick={handlers.handleOpenBasket} />
+            {state.adminIsAuthenticated && <AdminPanel />}
             {data.preview && <FilmPreview {...data.preview} onClick={handlers.handleOpenFilm}  /> }
             <FilmsGallery
                 items={state.films}
@@ -27,7 +30,7 @@ function App() {
                 onClick={handlers.setSelectedFilm}
             />
         </Layout>
-
+        
         {(state.modal && data.preview) && <Modal
             onClose={handlers.closeModal}
             message={state.message}
@@ -79,11 +82,10 @@ function App() {
                 onClick={handlers.closeModal}
             />}
             {(state.modal === 'admin-auth') && (
-  
-    <AdminAuthForm 
-      onSubmit={handlers.handleAdminLogin}
-      error ={state.adminError}
-    />
+                <AdminAuthForm 
+                  onSubmit={handlers.handleAdminLogin}
+                  error ={state.adminError}
+                />
   
 )}
         </Modal>}

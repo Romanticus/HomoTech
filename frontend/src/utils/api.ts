@@ -1,60 +1,72 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ru';
+import dayjs from "dayjs";
+import "dayjs/locale/ru";
 
-dayjs.locale('ru-ru');
+dayjs.locale("ru-ru");
 
 export enum EnumApiMethods {
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE',
-    GET = 'GET',
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+  GET = "GET",
 }
 
 export type ErrorState = {
-    error: string;
+  error: string;
 };
+export interface CreateFilmDTO extends Omit<Movie, "id"> {}
 
+// DTO для обновления фильма
+export interface UpdateFilmDTO extends Movie {}
+
+// DTO для создания сеанса (без id и taken)
+export interface CreateSessionDTO extends Omit<Session, "id" | "taken"> {
+  film: string;
+  daytime: string; // Используем Date вместо строки
+}
+
+// DTO для ответа при создании сеанса
+export interface CreatedSessionDTO extends Session {}
 
 export class Api {
-    readonly baseUrl: string;
-    protected _options: RequestInit;
+  readonly baseUrl: string;
+  protected _options: RequestInit;
 
-    constructor(baseUrl: string, options: RequestInit = {}) {
-        this.baseUrl = baseUrl;
-        this._options = {
-            headers: {
-                'Content-Type': 'application/json',
-                ...((options.headers as object) ?? {}),
-            },
-        };
-    }
+  constructor(baseUrl: string, options: RequestInit = {}) {
+    this.baseUrl = baseUrl;
+    this._options = {
+      headers: {
+        "Content-Type": "application/json",
+        ...((options.headers as object) ?? {}),
+      },
+    };
+  }
 
-    protected async _handleResponse<T>(response: Response): Promise<T> {
-        if (response.ok) return response.json();
-        const data = (await response.json()) as ErrorState;
-        return Promise.reject(data.error ?? response.statusText);
-    }
+  protected async _handleResponse<T>(response: Response): Promise<T> {
+    if (response.ok) return response.json();
+    const data = (await response.json()) as ErrorState;
+    return Promise.reject(data.error ?? response.statusText);
+  }
 
-    protected async _get<T>(uri: string, method = EnumApiMethods.GET) {
-        const response = await fetch(this.baseUrl + uri, {
-            ...this._options,
-            method,
-        });
-        return this._handleResponse<T>(response);
-    }
+  protected async _get<T>(uri: string, method = EnumApiMethods.GET) {
+    const response = await fetch(this.baseUrl + uri, {
+      ...this._options,
+      method,
+    });
+    return this._handleResponse<T>(response);
+  }
 
-    protected async _post<T>(
-        uri: string,
-        data: object,
-        method = EnumApiMethods.POST
-    ) {
-        const response = await fetch(this.baseUrl + uri, {
-            ...this._options,
-            method,
-            body: JSON.stringify(data),
-        });
-        return this._handleResponse<T>(response);
-    }
+  protected async _post<T>(
+    uri: string,
+    data: object,
+    method = EnumApiMethods.POST
+  ) {
+    const response = await fetch(this.baseUrl + uri, {
+      ...this._options,
+      method,
+      body: JSON.stringify(data),
+    });
+    return this._handleResponse<T>(response);
+  }
 }
 
 // export class AdminFilmAPI extends FilmAPI {
@@ -65,132 +77,193 @@ export class Api {
 //         }
 //       });
 //     }
-  
+
 //     async auth(password: string): Promise<{ token: string }> {
 //       return this._post('/admin/auth', { password });
 //     }
 //   }
 export type ApiListResponse<Type> = {
-    total: number;
-    items: Type[];
+  total: number;
+  items: Type[];
 };
 
 export interface Movie {
-    id: string;
-    rating: number;
-    director: string;
-    tags: string[];
-    title: string;
-    about: string;
-    description: string;
-    image: string;
-    cover: string;
+  id: string;
+  rating: number;
+  director: string;
+  tags: string[];
+  title: string;
+  about: string;
+  description: string;
+  image: string;
+  cover: string;
 }
 
 export interface Session {
-    id: string;
-    film: string;
-    daytime: string;
-    day: string;
-    time: string;
-    hall: string;
-    rows: number;
-    seats: number;
-    price: number;
-    taken: string[];
+  id: string;
+  film: string;
+  daytime: string;
+  day: string;
+  time: string;
+  hall: string;
+  rows: number;
+  seats: number;
+  price: number;
+  taken: string[];
 }
 
 export interface Ticket {
-    film: string;
-    session: string;
-    daytime: string;
-    day: string;
-    time: string;
-    row: number;
-    seat: number;
-    price: number;
+  film: string;
+  session: string;
+  daytime: string;
+  day: string;
+  time: string;
+  row: number;
+  seat: number;
+  price: number;
 }
 
 export interface Contacts {
-    email: string;
-    phone: string;
+  email: string;
+  phone: string;
 }
 
 export interface Order extends Contacts {
-    tickets: Ticket[];
+  tickets: Ticket[];
 }
 
 export interface OrderResult extends Ticket {
-    id: string;
+  id: string;
 }
 
 export interface IFilmAPI {
-    getFilms: () => Promise<Movie[]>;
-    getFilmSchedule: (id: string) => Promise<Session[]>;
-    orderTickets: (order: Order) => Promise<OrderResult[]>;
+  getFilms: () => Promise<Movie[]>;
+  getFilmSchedule: (id: string) => Promise<Session[]>;
+  orderTickets: (order: Order) => Promise<OrderResult[]>;
 }
 
 /**
  * Класс для работы с API фильмов
  */
 export class FilmAPI extends Api implements IFilmAPI {
-    readonly cdn: string;
+  readonly cdn: string;
 
-    constructor(cdn: string, baseUrl: string, options?: RequestInit) {
-        super(baseUrl, options);
-        this.cdn = cdn;
-    }
+  constructor(cdn: string, baseUrl: string, options?: RequestInit) {
+    super(baseUrl, options);
+    this.cdn = cdn;
+  }
 
-    /**
-     * Получить список сеансов фильма
-     * @param id
-     */
-    async getFilmSchedule(id: string): Promise<Session[]> {
-        const data = await this._get<ApiListResponse<Session>>(
-            `/films/${id}/schedule`
-        );
-        return data.items.map((schedule) => {
-            const daytime = dayjs(schedule.daytime);
-            return {
-                ...schedule,
-                film: id,
-                day: daytime.format('D MMMM'),
-                time: daytime.format('HH:mm'),
-            };
-        });
-    }
+  /**
+   * Получить список сеансов фильма
+   * @param id
+   */
+  async getFilmSchedule(id: string): Promise<Session[]> {
+    const data = await this._get<ApiListResponse<Session>>(
+      `/films/${id}/schedule`
+    );
+    return data.items.map((schedule) => {
+      const daytime = dayjs(schedule.daytime);
+      return {
+        ...schedule,
+        film: id,
+        day: daytime.format("D MMMM"),
+        time: daytime.format("HH:mm"),
+      };
+    });
+  }
 
-    /**
-     * Получить список фильмов
-     */
-    async getFilms(): Promise<Movie[]> {
-        const data = await this._get<ApiListResponse<Movie>>('/films');
-        return data.items.map((item) => ({
-            ...item,
-            image: this.cdn + item.image,
-            cover: this.cdn + item.cover,
-        }));
-    }
+  /**
+   * Получить список фильмов
+   */
+  async getFilms(): Promise<Movie[]> {
+    const data = await this._get<ApiListResponse<Movie>>("/films");
+    return data.items.map((item) => {
+      if (item.image.startsWith("http")) {
+        return {
+          ...item,
+          image: item.image,
+          cover: item.cover,
+        };
+      } else {
+        return {
+          ...item,
+          image: this.cdn + item.image,
+          cover: this.cdn + item.cover,
+        };
+      }
+    });
+  }
 
-    /**
-     * Забронировать билеты
-     * @param order - данные для бронирования
-     * @param order.tickets - список билетов, для каждого требуются как минимум поля film, session, row, seat
-     * @param order.email - email пользователя
-     * @param order.phone - телефон пользователя
-     */
-    async orderTickets(order: Order): Promise<OrderResult[]> {
-        const data = await this._post<ApiListResponse<OrderResult>>(
-            '/order',
-            order
-        );
-        return data.items.map((ticket) => {
-            const daytime = dayjs(ticket.daytime);
-            return {
-                ...ticket,
-                day: daytime.format('D MMMM'),
-                time: daytime.format('HH:mm'),
-            };
-        });
-    }
+  /**
+   * Забронировать билеты
+   * @param order - данные для бронирования
+   * @param order.tickets - список билетов, для каждого требуются как минимум поля film, session, row, seat
+   * @param order.email - email пользователя
+   * @param order.phone - телефон пользователя
+   */
+  async orderTickets(order: Order): Promise<OrderResult[]> {
+    const data = await this._post<ApiListResponse<OrderResult>>(
+      "/order",
+      order
+    );
+    return data.items.map((ticket) => {
+      const daytime = dayjs(ticket.daytime);
+      return {
+        ...ticket,
+        day: daytime.format("D MMMM"),
+        time: daytime.format("HH:mm"),
+      };
+    });
+  }
+}
+
+export class AdminFilmAPI extends FilmAPI {
+  constructor(cdn: string, baseUrl: string, adminToken: string) {
+    super(cdn, baseUrl, {
+      headers: {
+        "X-Admin-Token": adminToken, // Используем кастомный заголовок
+      },
+    });
+  }
+  /**
+   * Создать новый фильм
+   * @param data - данные фильма
+   */
+  async createFilm(data: CreateFilmDTO): Promise<Movie> {
+    return this._post<Movie>("/films/admin", data);
+  }
+
+  /**
+   * Создать новый сеанс
+   * @param data - данные сеанса
+   */
+  async createSession(data: CreateSessionDTO): Promise<Session> {
+    const daytime = dayjs(data.daytime);
+    const newdata = {
+      ...data,
+      daytime: dayjs(data.daytime).toISOString(),
+      day: daytime.format("D MMMM"),
+      time: daytime.format("HH:mm"),
+    };
+    return this._post<Session>(`/films/admin/${data.film}/schedule`, newdata);
+  }
+
+  /**
+   * Обновить фильм
+   * @param id - ID фильма
+   * @param data - новые данные
+   */
+  async updateFilm(id: string, data: UpdateFilmDTO): Promise<Movie> {
+    return this._put<Movie>(`/admin/films/${id}`, data);
+  }
+
+  // Добавим метод для PUT-запросов
+  protected async _put<T>(uri: string, data: object) {
+    const response = await fetch(this.baseUrl + uri, {
+      ...this._options,
+      method: "PUT",
+      body: JSON.stringify(data),
+    });
+    return this._handleResponse<T>(response);
+  }
 }
