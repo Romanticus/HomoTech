@@ -53,7 +53,17 @@ export class FilmsRepository {
     const film = this.filmRepository.create(dto);
     return this.filmRepository.save(film);
   }
+async findFilm(id: string): Promise<FilmDTO> {
+    const film = await this.filmRepository.findOne({
+      where: { id },
+    });
 
+    if (!film) {
+      throw new Error('Film Not Found');
+    }
+      const mappedFilm = this.mapFilmToDTO(film)
+    return mappedFilm;
+  }
   async createSchedule(filmId: string, dto: CreateScheduleDTO): Promise<Schedule> {
     const film = await this.filmRepository.findOneBy({ id: filmId });
     if (!film) throw new Error('Фильм не найден');
