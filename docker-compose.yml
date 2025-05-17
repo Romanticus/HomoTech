@@ -3,7 +3,7 @@ services:
     build:
       context: ./
       dockerfile: ./frontend/Dockerfile
-    container_name: frontend
+    container_name: homotech-frontend
     restart: "unless-stopped"
     ports:
       - "80:80"
@@ -16,7 +16,7 @@ services:
     build:
       context: ./
       dockerfile: ./backend/Dockerfile
-    container_name: backend
+    container_name: homotech-backend
     restart: "unless-stopped"
     depends_on:
       - db
@@ -39,7 +39,7 @@ services:
 
   db:
     image: postgres:15
-    container_name: db
+    container_name: homotech-db
     restart: "unless-stopped"
     environment:
       POSTGRES_USER: prac1
@@ -54,7 +54,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: homotech-pgadmin
     restart: "unless-stopped"
     environment:
       PGADMIN_DEFAULT_EMAIL: root@example.com
