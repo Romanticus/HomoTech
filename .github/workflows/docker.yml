@@ -3,7 +3,7 @@ name: CI Build and Publish Docker Images
 on:
   push:
     branches:
-      - review-3
+      - admin-panel
 
 jobs:
   build-and-push:

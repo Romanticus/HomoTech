@@ -24,6 +24,12 @@ services:
       - DATABASE_USERNAME=prac1
       - DATABASE_PASSWORD=prac1
       - DATABASE_NAME=prac1
+      - LOGGER_TYPE=dev 
+      - ADMIN_SECRET=admin 
+      - ADMIN_PASSWORD=admin 
+      - MAIL_USER=romabludilin  
+      - MAIL_PASS=spqybyipajxhriqt 
+      - MAIL_FROM=romabludilin@yandex.ru
     build:
       context: ./  # Использовать корень проекта как контекст
       dockerfile: ./backend/Dockerfile
