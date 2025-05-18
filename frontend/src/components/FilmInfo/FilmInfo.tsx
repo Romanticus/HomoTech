@@ -5,7 +5,7 @@ export type FilmInfoProps = {
     id: string;
     rating: string | number;
     director: string;
-    tags: string[];
+    tags: string ;
     title: string;
     description: string;
     isCompact?: boolean;
