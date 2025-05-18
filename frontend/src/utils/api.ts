@@ -91,7 +91,7 @@ export interface Movie {
   id: string;
   rating: number;
   director: string;
-  tags: string[];
+  tags: string ;
   title: string;
   about: string;
   description: string;

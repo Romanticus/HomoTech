@@ -12,7 +12,7 @@ export const AdminFilmForm = ({ onSubmit, error }: Props) => {
     title: '',
     rating: 0,
     director: '',
-    tags: [],
+    tags: '',
     about: '',
     description: '',
     image: '',
@@ -27,12 +27,7 @@ export const AdminFilmForm = ({ onSubmit, error }: Props) => {
         ...prev,
         [name]: Math.min(10, Math.max(0, Number(value)))
       }));
-    } else if (name === 'tags') {
-      setFormData(prev => ({
-        ...prev,
-        tags: value.split(',').map(tag => tag.trim())
-      }));
-    } else {
+    }  else {
       setFormData(prev => ({
         ...prev,
         [name]: value
@@ -47,7 +42,7 @@ export const AdminFilmForm = ({ onSubmit, error }: Props) => {
       title: '',
       rating: 0,
       director: '',
-      tags: [],
+      tags: '',
       about: '',
       description: '',
       image: '',
@@ -111,7 +106,7 @@ export const AdminFilmForm = ({ onSubmit, error }: Props) => {
             className={styles.input}
             name="tags"
             type="text"
-            value={formData.tags.join(', ')}
+            value={formData.tags}
             onChange={handleInputChange}
           />
         </label>
