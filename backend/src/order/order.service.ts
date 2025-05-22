@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { CreateOrderDto, OrderResponse } from './dto/order.dto';
 import * as nodemailer from 'nodemailer';
 import * as dayjs from 'dayjs';
-import { error, log } from 'console';
+ 
  
 @Injectable()
 export class OrderService {
@@ -131,14 +131,14 @@ public async findFilmName(id: string): Promise<string> {
           pass: cfg.pass,
         },
       });
-      console.log(transporter);
+      
       // 2. Затем резервируем места и отправляем письмо
       await this.filmsRepository.reserveSeats(
         firstTicket.film,
         firstTicket.session,
         tickets,
       );
-
+      await this.filmsRepository.createOrder(dto);
       // 3. Отправка письма после успешного резервирования
       await transporter.sendMail(
         {

@@ -19,7 +19,7 @@ export default function AdminPanel() {
         <AdminFilmForm 
           onSubmit={handlers.handleCreateFilm}
           error={state.adminError}
-        />
+        />ё
       </div>
 
       <div className={styles.adminSection}>

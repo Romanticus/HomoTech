@@ -6,11 +6,11 @@ import {
   initialState,
   Modals,
 } from "../utils/state.ts";
-import { AdminFilmAPI, Contacts, CreatedSessionDTO, CreateFilmDTO, CreateSessionDTO, FilmAPI, IFilmAPI, Movie, Session } from "../utils/api.ts";
+import { AdminFilmAPI, Contacts,  CreateFilmDTO, CreateSessionDTO, FilmAPI, IFilmAPI, Movie, Session } from "../utils/api.ts";
 import {
   API_URL,
   CDN_URL,
-  REACT_APP_ADMIN_SECRET,
+   
 } from "../utils/constants.ts";
 import { Button } from "../components/Button/Button.tsx";
  
@@ -142,7 +142,7 @@ export function useAppState() {
       
       sessionStorage.setItem("adminToken", access_token);
       dispatch({ type: "admin/login" });
-      // window.location.href = '/admin';
+      
     } catch (error) {
       if (error instanceof Error) {
         dispatch({ type: "admin/authError", payload: error.message });
@@ -166,22 +166,6 @@ const handleCreateFilm = async (data: CreateFilmDTO) => {
   }
 };
 
-// const handleCreateSchedule = async (data: CreateScheduleDTO) => {
-//   try {
-//     if (!adminApi) throw new Error('Нет доступа');
-    
-//     const newSession = await adminApi.createSession(data);
-//     dispatch({
-//       type: 'admin/addSession',
-//       payload: newSession
-//     });
-    
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       dispatch({ type: 'admin/error', payload: error.message });
-//     }
-//   }
-// };
   const handleAdminLogout = () => {
     dispatch({ type: "admin/logout" });
     sessionStorage.removeItem("adminAuth");

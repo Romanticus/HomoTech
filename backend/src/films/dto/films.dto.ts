@@ -54,3 +54,9 @@ export class CreateScheduleDTO implements Omit<SheduleDTO, 'id'|'taken'> {
 }
 
 export class UpdateScheduleDTO extends SheduleDTO {}
+
+export class CreateDataBaseOrderDto {
+  email: string;
+  phone: string;
+  total:number;
+}
