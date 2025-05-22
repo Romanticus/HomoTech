@@ -3,9 +3,13 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { FilmsRepository } from '../repository/films.repository';
 import { uuid } from 'uuidv4';
 import { ConfigService } from '@nestjs/config';
-import { CreateOrderDto, OrderResponse } from './dto/order.dto';
+import { CreateOrderDto, OrderListResponseDTO, OrderResponse } from './dto/order.dto';
 import * as nodemailer from 'nodemailer';
 import * as dayjs from 'dayjs';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Order } from 'src/films/entities/order.entity';
+import { Ticket } from 'src/films/entities/ticket.entity';
+import { Repository } from 'typeorm';
  
  
 @Injectable()
@@ -13,6 +17,10 @@ export class OrderService {
   constructor(
     private readonly filmsRepository: FilmsRepository,
     private readonly configService: ConfigService,
+    @InjectRepository(Order)
+  private readonly orderRepository: Repository<Order>,
+  @InjectRepository(Ticket)
+  private readonly ticketRepository: Repository<Ticket>
   ) {}
   public async renderEmailTemplate(dto: CreateOrderDto): Promise<string> {
     const total = dto.tickets.reduce((sum, ticket) => sum + ticket.price, 0);
@@ -171,4 +179,38 @@ public async findFilmName(id: string): Promise<string> {
       );
     }
   }
+  // order.service.ts
+
+async getAllOrders(): Promise<OrderListResponseDTO> {
+  try {
+    // Получаем заказы с отношениями билетов
+    const orders = await this.orderRepository.find({
+      relations: ['tickets'],
+      order: { created_at: 'DESC' }
+    });
+
+    // Маппинг сущностей в DTO
+    const ordersDTO = orders.map(order => ({
+      id: order.id,
+      email: order.email,
+      phone: order.phone,
+      total: order.total,
+      created_at: order.created_at,
+      tickets: order.tickets.map(ticket => ({
+        id: ticket.id,
+        film_id: ticket.film_id,
+        session_id: ticket.session_id,
+        row: ticket.row,
+        seat: ticket.seat,
+        price: ticket.price,
+        session_time: ticket.session_time
+      }))
+    }));
+
+    return { orders: ordersDTO };
+  } catch (error) {
+    console.error('Ошибка получения заказов:', error);
+    throw new BadRequestException('Не удалось получить список заказов');
+  }
+}
 }

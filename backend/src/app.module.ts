@@ -8,6 +8,9 @@ import { OrderService } from './order/order.service';
 import { FilmsModule } from './films/films.module';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Order } from './films/entities/order.entity';
+import { Ticket } from './films/entities/ticket.entity';
 
 @Module({
   imports: [
@@ -21,7 +24,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     FilmsModule,
     DatabaseModule,
-    AuthModule
+    AuthModule,
+    TypeOrmModule.forFeature([Order, Ticket])
   ],
   controllers: [OrderController],
   exports: [configProvider],
