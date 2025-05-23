@@ -1,25 +1,31 @@
 import { useState } from "react";
  
-import { CreateFilmDTO, CreateSessionDTO } from "../../utils/api";
+ 
 import { AdminFilmForm } from "../AdminFilmForm/AdminFilmForm";
 import { AdminScheduleForm } from "../AdminScheduleForm/AdminScheduleForm";
 import { useAppContext } from "../../contexts/AppContext";
 import styles from './AdminPanel.module.scss';
+import { AdminOrdersList } from "../AdminOrdersList/AdminOrdersList";
+ 
 export default function AdminPanel() {
   const { state,  handlers } = useAppContext();
   const [selectedFilmId, setSelectedFilmId] = useState('');
+  const [showOrders, setShowOrders] = useState(false);
 
   return (
     
     <div className={styles.adminPanel}>
       <button className={styles.submitButton} onClick={handlers.handleAdminLogout}>Выйти</button>
-      { state.adminIsAuthenticated && (<>
+      <button className={styles.customButton} onClick={() => setShowOrders(!showOrders)}>{showOrders ? 'Скрыть заказы' : 'Просмотр заказов'}</button>
+      { state.adminIsAuthenticated&& (
+           (<>
+      {showOrders && (<AdminOrdersList/>)} 
       <div className="admin-section">
     
         <AdminFilmForm 
           onSubmit={handlers.handleCreateFilm}
           error={state.adminError}
-        />ё
+        /> 
       </div>
 
       <div className={styles.adminSection}>
@@ -42,8 +48,7 @@ export default function AdminPanel() {
             onSubmit={handlers.handleCreateSchedule}
             error={state.adminError}
           />
-        )}
-      </div></>)}
+        )}  </div></>))}
     </div> 
   );
 };

@@ -42,5 +42,6 @@ export class OrderResponseDTO {
 }
 
 export class OrderListResponseDTO {
-  orders: OrderResponseDTO[];
+  total:number;
+  items: OrderResponseDTO[];
 }

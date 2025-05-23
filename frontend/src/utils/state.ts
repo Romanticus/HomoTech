@@ -1,4 +1,4 @@
-import { Contacts, Movie, Session, Ticket } from "./api.ts";
+import { Contacts, GetOrder, Movie, Order, Session, Ticket } from "./api.ts";
 
 export type Modals = "schedule" | "places" | "basket" | "contacts" | "success" | "admin-auth";
 
@@ -14,7 +14,7 @@ export interface AppState {
   isError: boolean;
   adminIsAuthenticated: boolean;
   adminError: string | null;
-  
+  orders: GetOrder[];
 } 
 export type Actions =
   | { type: "setFilms"; payload: Movie[] }
@@ -32,6 +32,7 @@ export type Actions =
   | { type: "admin/authError"; payload: string }
   | { type: 'admin/error'; payload: string }
   | { type: 'admin/addFilm'; payload: Movie }
+  | { type: 'admin/setOrders'; payload: GetOrder[] }
   | { type: 'admin/addSession'; payload: Session };;
 
 export const initialState: AppState = {
@@ -49,6 +50,7 @@ export const initialState: AppState = {
   isError: false,
   adminIsAuthenticated: false,
   adminError: null,
+  orders:[],
 };
 
 const addTicket = (state: AppState, key: string): AppState => {
@@ -200,7 +202,12 @@ export function appReducer(state: AppState, action: Actions): AppState {
         films: [...state.films, action.payload], // Добавляем фильм в основной список
         adminError: null
       };
-
+    case 'admin/setOrders':
+  return {
+    ...state,
+    orders: action.payload,
+    adminError: null
+  };
     case 'admin/addSession':
       return {
         ...state,

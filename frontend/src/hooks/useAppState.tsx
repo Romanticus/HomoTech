@@ -126,6 +126,22 @@ export function useAppState() {
       api.current.getFilmSchedule(state.selectedFilm).then(setCurrentSchedule);
     }
   };
+  const handleGetOrders = async()=>{try {
+     const adminApi = new AdminFilmAPI(
+      CDN_URL, 
+      API_URL, 
+      sessionStorage.getItem('adminToken')!
+    );
+
+   const orders = await adminApi.getOrders();
+    
+   
+    dispatch({ type: 'admin/setOrders', payload: orders });
+  }catch (error ) {
+    if (error instanceof Error) {
+        dispatch({ type: "admin/authError", payload: error.message });
+      }
+  }}
   const handleAdminLogin = async (password: string) => {
     try {
       const response = await fetch(`${API_URL}/admin/auth`, {
@@ -149,7 +165,7 @@ export function useAppState() {
       }
     }
   };
-
+  
 const handleCreateFilm = async (data: CreateFilmDTO) => {
   try {
      const adminApi = new AdminFilmAPI(
@@ -213,7 +229,8 @@ const handleCreateFilm = async (data: CreateFilmDTO) => {
       handleAdminLogout,
       openAdminPanel,
       handleCreateSchedule,
-      handleCreateFilm
-    },
+      handleCreateFilm,
+      handleGetOrders
+  },
   };
 }

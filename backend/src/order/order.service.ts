@@ -207,7 +207,9 @@ async getAllOrders(): Promise<OrderListResponseDTO> {
       }))
     }));
 
-    return { orders: ordersDTO };
+    return { 
+      total: ordersDTO.length,
+      items: ordersDTO };
   } catch (error) {
     console.error('Ошибка получения заказов:', error);
     throw new BadRequestException('Не удалось получить список заказов');

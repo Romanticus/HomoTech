@@ -1,0 +1,90 @@
+.ordersSection {
+  padding: 2rem;
+  max-width: 1200px;
+//   margin: 0 auto;
+}
+
+.ordersTable {
+  display: flex;
+  gap: 1.5rem;
+  min-width: 100%;
+}
+
+.orderCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  height: fit-content;
+}
+ 
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  
+  span {
+    font-weight: 500;
+    color: #333;
+    
+    &:first-child {
+      flex: 2;
+    }
+    
+    &:nth-child(2) {
+      flex: 1;
+      text-align: center;
+    }
+    
+    &:last-child {
+      flex: 1;
+      text-align: right;
+      color: #2196f3;
+    }
+  }
+}
+
+.orderDetails {
+  .userInfo {
+    margin-bottom: 1.5rem;
+    
+    p {
+      margin: 0.5rem 0;
+      color: #666;
+    }
+  }
+}
+
+.ticketsList {
+  h4 {
+    margin-bottom: 1rem;
+    color: #333;
+  }
+}
+
+.ticketItem {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  span{
+    color: #333;
+  }
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}

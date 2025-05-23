@@ -9,7 +9,16 @@ export enum EnumApiMethods {
   DELETE = "DELETE",
   GET = "GET",
 }
+export interface GetOrder extends Contacts {
+  id: string;
+  created_at: string;
+  tickets: OrderTicket[];
+  total: number;
+}
 
+export interface OrderResult extends Ticket {
+  id: string;
+}
 export type ErrorState = {
   error: string;
 };
@@ -122,14 +131,24 @@ export interface Ticket {
   seat: number;
   price: number;
 }
-
+export interface OrderTicket {
+  id:string;
+  film_id: string;
+  session_id: string;
+  session_time: string;
+  day: string;
+  time: string;
+  row: number;
+  seat: number;
+  price: number;
+}
 export interface Contacts {
   email: string;
   phone: string;
 }
 
 export interface Order extends Contacts {
-  tickets: Ticket[];
+  tickets:  Ticket[];
 }
 
 export interface OrderResult extends Ticket {
@@ -232,7 +251,10 @@ export class AdminFilmAPI extends FilmAPI {
   async createFilm(data: CreateFilmDTO): Promise<Movie> {
     return this._post<Movie>("/films/admin", data);
   }
-
+ 
+async getOrders(): Promise<GetOrder[]> {
+  return this._get<ApiListResponse<GetOrder>>('/order/admin').then(data => data.items );
+}
   /**
    * Создать новый сеанс
    * @param data - данные сеанса
