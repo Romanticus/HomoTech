@@ -16,6 +16,7 @@ export default function AdminPanel() {
     
     <div className={styles.adminPanel}>
       <button className={styles.submitButton} onClick={handlers.handleAdminLogout}>Выйти</button>
+     
       <button className={styles.customButton} onClick={() => setShowOrders(!showOrders)}>{showOrders ? 'Скрыть заказы' : 'Просмотр заказов'}</button>
       { state.adminIsAuthenticated&& (
            (<>

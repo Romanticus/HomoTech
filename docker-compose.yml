@@ -9,8 +9,8 @@ services:
       - "80:80"
     networks:
       - app-network 
-    volumes:
-      - frontend-data:/usr/share/nginx/html:ro
+    # volumes:
+      # - frontend-data:/usr/share/nginx/html:ro
 
   backend:
     build:
