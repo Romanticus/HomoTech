@@ -10,7 +10,7 @@ export const AdminOrdersList = () => {
       handlers.handleGetOrders();
      
     
-  }, [state.adminIsAuthenticated]);
+  }, []);
 
   const getFilmTitle = (filmId: string) => 
     state.films.find(f => f.id === filmId)?.title || 'Неизвестный фильм';

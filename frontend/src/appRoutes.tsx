@@ -1,7 +1,5 @@
-import {   Routes, Route, Navigate } from 'react-router-dom';
- import AdminPanel from './components/AdminPanel/AdminPanel';
+import {   Routes, Route } from 'react-router-dom';
 import App from './components/App/App';
-import { useAppState } from './hooks/useAppState';
 
 
 

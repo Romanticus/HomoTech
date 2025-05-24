@@ -1,4 +1,4 @@
-import { Contacts, GetOrder, Movie, Order, Session, Ticket } from "./api.ts";
+import { Contacts, GetOrder, Movie, Session, Ticket } from "./api.ts";
 
 export type Modals = "schedule" | "places" | "basket" | "contacts" | "success" | "admin-auth";
 
@@ -33,7 +33,7 @@ export type Actions =
   | { type: 'admin/error'; payload: string }
   | { type: 'admin/addFilm'; payload: Movie }
   | { type: 'admin/setOrders'; payload: GetOrder[] }
-  | { type: 'admin/addSession'; payload: Session };;
+  | { type: 'admin/addSession'; payload: Session };
 
 export const initialState: AppState = {
   films: [],
