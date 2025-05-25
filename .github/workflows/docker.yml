@@ -34,6 +34,8 @@ jobs:
           file: ./frontend/Dockerfile
           push: true
           tags: ghcr.io/romanticus/homotech/frontend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and push backend Docker image
         uses: docker/build-push-action@v4
@@ -42,3 +44,5 @@ jobs:
           file: ./backend/Dockerfile
           push: true
           tags: ghcr.io/romanticus/homotech/backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
