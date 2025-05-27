@@ -30,9 +30,9 @@ services:
       - MAIL_USER=romabludilin  
       - MAIL_PASS=spqybyipajxhriqt 
       - MAIL_FROM=romabludilin@yandex.ru
-    build:
-      context: ./  # Использовать корень проекта как контекст
-      dockerfile: ./backend/Dockerfile
+    # build:
+    #   context: ./  # Использовать корень проекта как контекст
+    #   dockerfile: ./backend/Dockerfile
 
   db:
     image: postgres:15

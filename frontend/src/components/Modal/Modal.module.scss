@@ -1,5 +1,5 @@
-@use 'variables' as *;
-@use 'mixins';
+@use "variables" as *;
+@use "mixins";
 
 .modal {
   @include mixins.sublayer;
@@ -21,6 +21,9 @@
     border-radius: 3rem;
     box-sizing: border-box;
     position: relative;
+    @media (max-width: 740px) {
+      padding: 1.5rem 1.5rem 1.5rem;
+    }
   }
 
   .content {
@@ -31,7 +34,7 @@
     position: absolute;
     top: calc(#{$defaultPadding} / 2);
     right: calc(#{$defaultPadding} / 2);
-    @include mixins.icon(2rem, 'close');
+    @include mixins.icon(2rem, "close");
     @include mixins.link(white, $hover);
   }
 
@@ -51,6 +54,9 @@
 
 .active {
   display: flex;
+  @media (max-width: 740px) {
+      height: 90svh;
+    }
 }
 
 .error {

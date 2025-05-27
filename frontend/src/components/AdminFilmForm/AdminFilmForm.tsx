@@ -101,7 +101,7 @@ export const AdminFilmForm = ({ onSubmit, error }: Props) => {
 
       <div className={styles.formGroup}>
         <label className={styles.label}>
-          Теги 
+          Тег/Жанр 
           <input
             className={styles.input}
             name="tags"

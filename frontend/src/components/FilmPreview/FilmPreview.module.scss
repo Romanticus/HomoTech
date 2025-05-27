@@ -11,6 +11,10 @@
   .content {
     @include mixins.container;
     z-index: 1;
+     @media (max-width: 740px) {
+     
+      padding: 1.7rem; 
+    }
   }
   .action {
     margin-top: $defaultPadding;

@@ -1,5 +1,5 @@
-@use 'variables' as *;
-@use 'mixins';
+@use "variables" as *;
+@use "mixins";
 
 .ticket {
   @include mixins.flex(row);
@@ -8,6 +8,7 @@
   background: $primaryLight;
   padding: $defaultPadding;
   border-radius: 3rem;
+  flex-wrap: wrap;
 
   .info {
     flex-grow: 1;
@@ -18,15 +19,18 @@
     display: block;
     margin-bottom: 1rem;
     font-size: 2.4rem;
+    @media (max-width: 740px) {
+      font-size: 1.6rem;
+    }
   }
 
   .place::before {
-    content: '➔';
+    content: "➔";
     margin-right: 0.5rem;
   }
 
   .delete {
-    @include mixins.icon(2rem, 'trash');
+    @include mixins.icon(2rem, "trash");
     @include mixins.link($hover, white);
     opacity: 0.5;
   }
