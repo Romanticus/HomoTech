@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { FilmListResponseDTO, FilmSheduleDTO } from './dto/films.dto';
+import { CreateFilmDTO, CreateScheduleDTO, FilmDTO, FilmListResponseDTO, FilmSheduleDTO, SheduleDTO } from './dto/films.dto';
 import { FilmsRepository } from '../repository/films.repository';
 
 @Injectable()
@@ -17,5 +17,16 @@ export class FilmsService {
     } catch (e) {
       throw new Error('Фильм не найден');
     }
+  }
+  
+  
+  async createFilm(dto: CreateFilmDTO): Promise<FilmDTO> {
+    const film = await this.filmsRepository.createFilm(dto);
+    return this.filmsRepository.mapFilmToDTO(film);
+  }
+
+  async createSchedule(filmId: string, dto: CreateScheduleDTO): Promise<SheduleDTO> {
+    const schedule = await this.filmsRepository.createSchedule(filmId, dto);
+    return this.filmsRepository.mapScheduleToDTO(schedule);
   }
 }

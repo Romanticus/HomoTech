@@ -1,9 +1,14 @@
-@use 'variables' as *;
-@use 'mixins';
+@use "variables" as *;
+@use "mixins";
 
 .schedule {
   @include mixins.flex(row);
   gap: $defaultPadding;
+  
+  @media (max-width: 740px) {
+    gap: 2rem 0.6rem;
+    flex-wrap: wrap;
+  }
 
   .places {
     flex-direction: column;

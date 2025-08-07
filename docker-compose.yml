@@ -3,20 +3,20 @@ services:
     build:
       context: ./
       dockerfile: ./frontend/Dockerfile
-    container_name: frontend
+    container_name: homotech-frontend
     restart: "unless-stopped"
     ports:
       - "80:80"
     networks:
       - app-network 
-    volumes:
-      - frontend-data:/usr/share/nginx/html:ro
+    # volumes:
+      # - frontend-data:/usr/share/nginx/html:ro
 
   backend:
     build:
       context: ./
       dockerfile: ./backend/Dockerfile
-    container_name: backend
+    container_name: homotech-backend
     restart: "unless-stopped"
     depends_on:
       - db
@@ -30,10 +30,16 @@ services:
       - DATABASE_USERNAME=prac1
       - DATABASE_PASSWORD=prac1
       - DATABASE_NAME=prac1
+      - LOGGER_TYPE=dev 
+      - ADMIN_SECRET=admin 
+      - ADMIN_PASSWORD=admin 
+      - MAIL_USER=romabludilin  
+      - MAIL_PASS=spqybyipajxhriqt 
+      - MAIL_FROM=romabludilin@yandex.ru
 
   db:
     image: postgres:15
-    container_name: db
+    container_name: homotech-db
     restart: "unless-stopped"
     environment:
       POSTGRES_USER: prac1
@@ -48,7 +54,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: homotech-pgadmin
     restart: "unless-stopped"
     environment:
       PGADMIN_DEFAULT_EMAIL: root@example.com

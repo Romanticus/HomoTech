@@ -1,0 +1,106 @@
+.ordersSection {
+  padding: 2rem 0;
+  // max-width: 1200px;
+  //   margin: 0 auto;
+}
+
+.ordersTable {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  min-width: 100%;
+}
+
+.orderCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  height: fit-content;
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+
+  span {
+    font-weight: 500;
+    color: #333;
+
+    &:first-child {
+      flex: 2;
+    }
+
+    &:nth-child(2) {
+      flex: 1;
+      text-align: center;
+    }
+
+    &:last-child {
+      flex: 1;
+      text-align: right;
+      color: #2196f3;
+    }
+  }
+}
+
+.orderDetails {
+  .userInfo {
+    margin-bottom: 1.5rem;
+
+    p {
+      margin: 0.5rem 0;
+      color: #666;
+    }
+  }
+}
+
+.ticketsList {
+  display: flex;
+  flex-direction: column;
+  // flex-wrap: wrap;
+  summary {
+    // display: flex;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  ::marker {
+    color: #2196f3;
+  }
+
+  h4 {
+    display: inline;
+    color: #333;
+  }
+}
+
+.ticketItem {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+  gap: 35px;
+  padding: 5px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  font-size: 12px;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  span {
+    color: #333;
+  }
+}
+
+.label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid #2196f3;
+}

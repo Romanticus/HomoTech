@@ -1,10 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './components/App/App';
-import './scss/styles.scss';
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import "./scss/styles.scss";
+import AppRoutes from "./appRoutes";
+import { BrowserRouter } from "react-router-dom";
+import { AppProvider } from "./contexts/AppContext";
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <AppProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </AppProvider>
+  </React.StrictMode>
+);

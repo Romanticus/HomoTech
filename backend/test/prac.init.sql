@@ -40,4 +40,30 @@ create table public.schedule
 alter table public.schedule
     owner to prac1;
 
+     CREATE TABLE public.order (
+    id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    email VARCHAR NOT NULL,
+    phone VARCHAR NOT NULL,
+    total DOUBLE PRECISION NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+alter table public.order
+    owner to prac1;
+  
+CREATE TABLE public.ticket (
+    id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    film_id uuid NOT NULL REFERENCES public.film(id),
+    session_id uuid NOT NULL REFERENCES public.schedule(id),
+    "row" INT NOT NULL,
+    seat INT NOT NULL,
+    price DOUBLE PRECISION NOT NULL,
+    session_time TIMESTAMP NOT NULL,
+    "orderId" uuid NOT NULL REFERENCES public.order(id)
+);
+
+alter table public.ticket
+    owner to prac1;
+
+
 
