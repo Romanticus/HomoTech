@@ -3,7 +3,7 @@ name: CI Build and Publish Docker Images
 on:
   push:
     branches:
-      - review-3
+      - admin-panel
 
 jobs:
   build-and-push:
@@ -33,7 +33,9 @@ jobs:
           context: ./
           file: ./frontend/Dockerfile
           push: true
-          tags: ghcr.io/romanticus/film-react/frontend:latest
+          tags: ghcr.io/romanticus/homotech/frontend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Build and push backend Docker image
         uses: docker/build-push-action@v4
@@ -41,4 +43,6 @@ jobs:
           context: ./
           file: ./backend/Dockerfile
           push: true
-          tags: ghcr.io/romanticus/film-react/backend:latest
+          tags: ghcr.io/romanticus/homotech/backend:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

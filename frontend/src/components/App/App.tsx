@@ -10,15 +10,19 @@ import {SelectPlaces} from "../SelectPlaces/SelectPlaces.tsx";
 import {Basket} from "../Basket/Basket.tsx";
 import {ContactsForm} from "../ContactsForm/ContactsForm.tsx";
 import {Message} from "../Message/Message.tsx";
-import {useAppState} from "../../hooks/useAppState.tsx";
-
+ 
+import { AdminAuthForm } from "../AdminAuthForm/AdminAuthForm.tsx";
+ 
+import AdminPanel from "../AdminPanel/AdminPanel.tsx";
+import { useAppContext } from "../../contexts/AppContext.tsx";
 
 function App() {
-    const { state, data, handlers } = useAppState();
-
+    // const { state, data, handlers } = useAppState();
+    const { state,data, handlers } = useAppContext();
     return (<>
-        <Layout isLocked={!!state.modal}>
+        <Layout isLocked={!!state.modal} onOpenAdminPanel={handlers.openAdminPanel}>
            <Header counter={state.basket.length} onClick={handlers.handleOpenBasket} />
+            {state.adminIsAuthenticated && <AdminPanel />}
             {data.preview && <FilmPreview {...data.preview} onClick={handlers.handleOpenFilm}  /> }
             <FilmsGallery
                 items={state.films}
@@ -26,20 +30,26 @@ function App() {
                 onClick={handlers.setSelectedFilm}
             />
         </Layout>
-
+        
         {(state.modal && data.preview) && <Modal
             onClose={handlers.closeModal}
             message={state.message}
             isError={state.isError}
             header={
-                (state.modal === 'schedule')
-                    ? <FilmInfo {...data.preview} description={data.preview.about} isCompact={true} />
-                    : <ModalHeader
-                        title={data.preview.title}
-                        description={data.preview.about}
-                        onClick={handlers.go('prev')}
+                state.modal === 'schedule' && data.preview ? (
+                  <FilmInfo {...data.preview} description={data.preview.about} isCompact={true} />
+                ) : state.modal === 'admin-auth' ? (
+                  <ModalHeader description="Ввведите пароль" title="Админский доступ" onClick={handlers.closeModal} />
+                ) : (
+                  data.preview && (
+                    <ModalHeader
+                      title={data.preview.title}
+                      description={data.preview.about}
+                      onClick={handlers.go('prev')}
                     />
-            }
+                  )
+                )
+              }
             actions={handlers.getAction()}
         >
             {(state.modal === 'schedule') && <SelectSession
@@ -71,6 +81,13 @@ function App() {
                 action={'На главную'}
                 onClick={handlers.closeModal}
             />}
+            {(state.modal === 'admin-auth') && (
+                <AdminAuthForm 
+                  onSubmit={handlers.handleAdminLogin}
+                  error ={state.adminError}
+                />
+  
+)}
         </Modal>}
     </>)
 }

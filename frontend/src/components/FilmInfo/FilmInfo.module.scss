@@ -5,6 +5,7 @@
   .about {
     @include mixins.flex(row);
     gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .about > * {
@@ -43,7 +44,13 @@
     font-size: $titleFontSize;
     line-height: 93%;
     margin: 0.2em 0;
+
+    @media (max-width: 740px) {
+      font-size:2.6em; // Уменьшаем размер на 30%
+    }
   }
+  
+  
 
   .description {
     font-size: $mainFontSize;
@@ -52,6 +59,9 @@
     max-width: 82%;
     margin: 0;
     margin-block: 0;
+    @media (max-width: 740px) {
+      font-size: 1em  ; 
+    }
   }
 }
 
@@ -60,8 +70,11 @@
 
   .title {
     font-size: 4em;
+    @media (max-width: 740px) {
+      font-size: 2em  ; 
+    }
   }
-
+   
   .description {
     max-width: inherit;
   }

@@ -5,3 +5,13 @@
 .locked {
   position: fixed;
 }
+.admin-panel-trigger {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 10px;
+  height: 10px;
+  opacity: 0.01;
+  cursor: pointer;
+  z-index: 9999;
+}

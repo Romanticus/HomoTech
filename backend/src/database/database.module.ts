@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSourceOptions } from 'typeorm'; // Добавляем импорт
 import { Film } from 'src/films/entities/film.entity';
 import { Schedule } from 'src/films/entities/schedule.entity';
+import { Order } from 'src/films/entities/order.entity';
+import { Ticket } from 'src/films/entities/ticket.entity';
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { Schedule } from 'src/films/entities/schedule.entity';
           username: config.get<string>('DATABASE_USERNAME'),
           password: config.get<string>('DATABASE_PASSWORD'), // Фикс здесь
           database: config.get<string>('DATABASE_NAME'),
-          entities: [Film, Schedule],
+          entities: [Film, Schedule,Order,Ticket],
           synchronize: false,
         };
       },

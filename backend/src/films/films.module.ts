@@ -7,9 +7,12 @@ import { FilmsService } from './films.service';
 import { Schedule } from './entities/schedule.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Film } from './entities/film.entity';
+import { AuthModule } from '..//auth/auth.module';
+import { Ticket } from './entities/ticket.entity';
+import { Order } from './entities/order.entity';
 
 @Module({
-  imports: [ConfigModule, TypeOrmModule.forFeature([Film, Schedule])],
+  imports: [ConfigModule,AuthModule , TypeOrmModule.forFeature([Film, Schedule,Ticket,Order])],
   providers: [
     // {
     //   provide: 'DATABASE_CONNECTION',
