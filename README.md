@@ -1,4 +1,5 @@
-## HomoTech — онлайн‑кинотеатр с админ‑панелью
+## HomoTech — магазин билетов в кинотеатр с админ‑панелью
+<img width="1862" height="953" alt="image" src="https://github.com/user-attachments/assets/fb029d89-df23-45af-9c57-5ac2df0d01fd" />
 
 ### Описание
 Одностраничное приложение для продажи билетов в кинотеатр:
@@ -39,23 +40,7 @@
 - Docker и Docker Compose 
 
 ### Переменные окружения
-
-Бэкенд (`backend`):
-- `DATABASE_DRIVER` — драйвер БД, по умолчанию `postgres`
-- `DATABASE_HOST` — хост БД
-- `DATABASE_PORT` — порт БД, например `5432`
-- `DATABASE_USERNAME` — пользователь БД
-- `DATABASE_PASSWORD` — пароль БД
-- `DATABASE_NAME` — имя БД
-- `LOGGER_TYPE` — тип логгера, например `dev`
-- `ADMIN_SECRET` — секрет подписи JWT для админа
-- `ADMIN_PASSWORD` — пароль входа в админ‑панель
-- `MAIL_USER`, `MAIL_PASS`, `MAIL_FROM` — SMTP для отправки email (используется Yandex SMTP)
-
-Фронтенд (`frontend`):
-- `VITE_API_URL` — базовый URL API, по умолчанию `/api/afisha`
-- `VITE_CDN_URL` — базовый URL контента, по умолчанию `/content/afisha`
-- `REACT_APP_ADMIN_TRIGGER_KEY` — клавиша для открытия формы входа админа (по умолчанию `KeyA`)
+Пример и подсказки по заполнению находятся в файлах `backend/env.example` и `frontend/env.example`.
 
 ### Быстрый старт в Docker
 ```bash
